@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,509&display=swap');
+
+.modal {
+    height: 100%;
+    width: 100%;
+    z-index: 8999;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.253);
+    backdrop-filter: blur(5px);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal_block {
+    padding: 14px;
+    position: relative;
+    display: flex;
+    width: 350px;
+    height: 350px;
+    background-color: rgb(41, 41, 41);
+    border: 1px solid rgba(197, 197, 197, 0.253);
+    border-radius: 10px;
+    z-index: 1;
+    margin-left: 20px;
+    margin-right: 20px;
+    flex-direction: column;
+    font-family: 'Roboto Flex', sans-serif;
+    font-size: 16px;
+    display: flex;
+    align-items: baseline;
+    
+}
+
+.modal_block .modal_close {
+    justify-content: end;
+}
+
+.modal_name_text {
+    color: white;
+}
+
+.modal_close {
+    position: absolute;
+    margin-top: 3px;
+    right: 15px;
+    cursor: pointer;
+}
+
+.close_img {
+    width: 15px;
+}
+
+.name_input {
+    font-size: 14px;
+    color: white;
+    margin-top: 120px;
+}
+
+.modal_form {
+    width: 100%;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center; 
+    flex-direction: column;
+    
+}
+
+.modal_input {
+    font-family: 'Roboto Flex', sans-serif;
+    width: 100%;
+    color: white;
+    margin-top: 5px;
+    font-size: 16px;
+    background-color: transparent;
+    background-color: rgba(168, 168, 168, 0.034);
+    padding: 7px;
+    outline: none;
+    border: 1px solid rgba(155, 155, 155, 0.253);
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.modal_button {
+    vertical-align: top;
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    padding: 8px;
+    cursor: pointer;
+    border: 1px solid rgba(102, 102, 102, 0.205);
+    background-color: rgba(165, 165, 165, 0.13);
+    backdrop-filter: blur(5px);
+    border-radius: 7px;
+    margin: 10px;
+    margin-top: 120px;
+}
+
+.modal_button:hover {
+    color: rgb(255, 255, 255);
+    background-color: rgba(165, 165, 165, 0.164);
+}

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Online chat</title>
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/modal.css">
+    <link rel="shortcut icon" href="pic/icon.png">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header_settings header_button">Настройки</div>
+                <div class="header_userName">
+                </div>
+            <div class="header_exit header_button">Выйти</div>
+        </div>
+        <div class="main">
+            <!-- <div class="my_message">
+                <div class="message_text">Ой бля, а мы и не думали!</div>
+                <div class="message_time">12:45</div>
+            </div>
+            <div class="message">
+                <div class="message_text">А чё Крым не берёте?</div>
+                <div class="message_time">12:19</div>
+            </div>
+            <div class="message">
+                <div class="message_text">Это Женя Пригожин!</div>
+                <div class="message_time">12:18</div>
+            </div>
+            <div class="my_message">
+                <div class="message_text">Привет. Это кто?</div>
+                <div class="message_time">12:16</div>
+            </div>
+            <div class="message">
+                <div class="message_text">Кирилл, привет!</div>
+                <div class="message_time">12:15</div>
+            </div> -->
+
+
+            <template id="myMessage">
+                <div class="my_message">
+                    <div class="message_text"></div>
+                    <div class="message_time"></div>
+                </div>
+            </template>
+            <template id="message">
+                <div class="message">
+                    <div class="message_name"></div>
+                    <div class="message_text"></div>
+                    <div class="message_time"></div>
+                </div>
+            </template>
+
+
+        </div>
+        <div class="footer">
+            <form class="footer_form">
+                <input class="footer_input" placeholder="Написать сообщение…" type="text">
+                <div class="footer_button">
+                    <img class="footer_img_sent" src="/pic/to-sent2.png" alt="to sent">
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script type="module" src="main.mjs"></script>
+    <script type="module" src="ui_modal.mjs"></script>
+    <script type="module" src="modal.mjs"></script>
+</body>
+</html>
