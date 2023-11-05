@@ -4,10 +4,18 @@ import Cookies from 'js-cookie';
 const footerForm = document.querySelector('.footer_form');
 const footerButton = document.querySelector('.footer_button');
 
+// function checkLength() {
+//     const message = document.querySelector('.message_text');
+//     if (message.offsetWidth > 260) {
+//         const parent = message.closest('.my_message');
+//         parent.style.flexDirection = 'column';
+//     }
+// }
+
 function add(event) {
+    event.preventDefault()
     const input = document.querySelector('.footer_input');
-    if (input.value !== '') {
-        event.preventDefault()
+    if (input.value.trim() !== '' && input.value.trim() !== ' ') {
         const main = document.querySelector('.main');
         const myMessage = document.getElementById('myMessage').content.cloneNode(true);
         let myText = myMessage.querySelector('.message_text');
@@ -18,14 +26,22 @@ function add(event) {
     
         main.insertBefore(myMessage, main.firstChild);
         input.value = ''
-    }
+
+        const messageElement = main.firstElementChild;
+        if (myText.offsetWidth > 255) {
+            messageElement.style.flexDirection = 'column';
+        }
+        }
+    
 }
 
-function addMessages(data) {
+async function addMessages(data) {
+    
     const main = document.querySelector('.main');
     const myMessage = document.getElementById('message').content.cloneNode(true);
     let myName = myMessage.querySelector('.message_name');
     myName.textContent = data.user.name;
+    let myBot = myMessage.querySelector('.message_bot');
     let myText = myMessage.querySelector('.message_text');
     myText.textContent = data.text;
     let myTime = myMessage.querySelector('.message_time');
@@ -35,7 +51,13 @@ function addMessages(data) {
     const time = formattedTime;
     myTime.textContent = time;
 
-    main.appendChild(myMessage);
+    main.insertBefore(myMessage, main.firstChild);
+
+    const messageElement = main.firstElementChild.lastElementChild;
+    console.log(messageElement);
+    if (myText.offsetWidth > 255) {
+        messageElement.style.flexDirection = 'column';
+    }
 }
 
 function getChat() {
@@ -58,6 +80,8 @@ function getChat() {
         console.log(data);
     })
 }
+
+
 
 footerForm.addEventListener('submit', add);
 footerButton.addEventListener('click', add);

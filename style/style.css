@@ -91,6 +91,7 @@ body::before {
     display: flex;
     flex-direction: column-reverse;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .main::-webkit-scrollbar {
@@ -162,6 +163,7 @@ body::before {
 }
 
 .message {
+    position: relative;
     color: white;
     background-color: rgb(37, 37, 37);
     padding: 8px;
@@ -174,13 +176,19 @@ body::before {
     margin-bottom: 10px;    
 }
 
+.message_bot {
+    display: flex;
+    flex-direction: row;
+}
+
 .my_message {
+    position: relative;
     color: white;
     background-color: rgb(39, 39, 39);
     padding: 8px;
     border-radius: 5px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     max-width: 300px;
     margin-left: auto;
     
@@ -196,14 +204,17 @@ body::before {
 
 .message_text {
     word-wrap: break-word;
+    width: 100%;
 }
 
 .message_time {
-    margin-top: 3px;
+    margin-top: auto;
+    margin-bottom: -3px;
     color: rgba(255, 255, 255, 0.486);
     font-size: 12px;
     order: 1;
     margin-left: auto;
+    
     padding-left: 10px;
 }
 
