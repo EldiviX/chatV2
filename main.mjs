@@ -4,36 +4,44 @@ import Cookies from 'js-cookie';
 const footerForm = document.querySelector('.footer_form');
 const footerButton = document.querySelector('.footer_button');
 
-// function checkLength() {
-//     const message = document.querySelector('.message_text');
-//     if (message.offsetWidth > 260) {
-//         const parent = message.closest('.my_message');
-//         parent.style.flexDirection = 'column';
-//     }
-// }
+function conect(message) {
+    const token = Cookies.get('code');
+    const socket = new WebSocket(`wss://edu.strada.one/websockets?${token}`);
+    socket.onopen = function() {
+        socket.send(JSON.stringify({ text: message }));
+    }
+    socket.onmessage = function(event) { console.log(event.data) };
+}
 
-function add(event) {
-    event.preventDefault()
+function add(data) {
+    event.preventDefault();
     const input = document.querySelector('.footer_input');
     if (input.value.trim() !== '' && input.value.trim() !== ' ') {
         const main = document.querySelector('.main');
         const myMessage = document.getElementById('myMessage').content.cloneNode(true);
         let myText = myMessage.querySelector('.message_text');
-        myText.textContent = input.value
+        myText.textContent = input.value;
         let myTime = myMessage.querySelector('.message_time');
         const time = format(new Date(), 'HH:mm');
         myTime.textContent = time;
+        const message = input.value;
+        conect(message);
     
         main.insertBefore(myMessage, main.firstChild);
-        input.value = ''
+        input.value = '';
 
         const messageElement = main.firstElementChild;
         if (myText.offsetWidth > 255) {
             messageElement.style.flexDirection = 'column';
         }
-        }
-    
+
+    }
 }
+
+window.addEventListener('scroll', function() {
+    const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+    console.log('Текущая прокрутка страницы:', scrollPosition);
+  })
 
 async function addMessages(data) {
     
@@ -50,13 +58,14 @@ async function addMessages(data) {
     const formattedTime = format(inputDate, 'HH:mm');
     const time = formattedTime;
     myTime.textContent = time;
+    main.appendChild(myMessage);
 
-    main.insertBefore(myMessage, main.firstChild);
-
-    const messageElement = main.firstElementChild.lastElementChild;
-    console.log(messageElement);
-    if (myText.offsetWidth > 255) {
-        messageElement.style.flexDirection = 'column';
+    const lastChild = main.lastElementChild;
+    if (lastChild && lastChild.lastElementChild) {
+        const messageElement = lastChild.lastElementChild;
+        if (myText.offsetWidth > 255) {
+            messageElement.style.flexDirection = 'column';
+        }
     }
 }
 
@@ -75,6 +84,8 @@ function getChat() {
     })
     .then(data => {
         Object.values(data.messages).forEach(messages => {
+            
+            console.log(messages);
             addMessages(messages);
         })
         console.log(data);
