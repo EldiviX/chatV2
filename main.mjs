@@ -38,11 +38,6 @@ function add(data) {
     }
 }
 
-window.addEventListener('scroll', function() {
-    const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-    console.log('Текущая прокрутка страницы:', scrollPosition);
-  })
-
 async function addMessages(data) {
     
     const main = document.querySelector('.main');
