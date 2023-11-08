@@ -44,7 +44,6 @@ async function addMessages(data) {
     const myMessage = document.getElementById('message').content.cloneNode(true);
     let myName = myMessage.querySelector('.message_name');
     myName.textContent = data.user.name;
-    let myBot = myMessage.querySelector('.message_bot');
     let myText = myMessage.querySelector('.message_text');
     myText.textContent = data.text;
     let myTime = myMessage.querySelector('.message_time');
@@ -53,6 +52,7 @@ async function addMessages(data) {
     const formattedTime = format(inputDate, 'HH:mm');
     const time = formattedTime;
     myTime.textContent = time;
+
     main.appendChild(myMessage);
 
     const lastChild = main.lastElementChild;
@@ -61,6 +61,26 @@ async function addMessages(data) {
         if (myText.offsetWidth > 255) {
             messageElement.style.flexDirection = 'column';
         }
+    }
+}
+
+function myAddMessages(data) {
+    const main = document.querySelector('.main');
+    const myMessage = document.getElementById('myMessage').content.cloneNode(true);
+    let myText = myMessage.querySelector('.message_text');
+    myText.textContent = data.text;
+    let myTime = myMessage.querySelector('.message_time');
+
+    const inputDate = new Date(data.createdAt);
+    const formattedTime = format(inputDate, 'HH:mm');
+    const time = formattedTime;
+    myTime.textContent = time;
+
+    main.insertBefore(myMessage, main.lastChild);
+
+    const messageElement = main.firstElementChild;
+    if (myText.offsetWidth > 255) {
+        messageElement.style.flexDirection = 'column';
     }
 }
 
@@ -79,9 +99,11 @@ function getChat() {
     })
     .then(data => {
         Object.values(data.messages).forEach(messages => {
-            
-            console.log(messages);
-            addMessages(messages);
+            if (messages.user.email === Cookies.get('mail')) {
+                myAddMessages(messages);
+            } else {
+                addMessages(messages);
+            }
         })
         console.log(data);
     })

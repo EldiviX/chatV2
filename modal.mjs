@@ -28,6 +28,7 @@ function post() {
             console.log('Запрос успешно отправлен!');
             console.log(data);
 
+            Cookies.set('mail', email)
             Cookies.set('userName', data.name)
         })
         .catch(error => {

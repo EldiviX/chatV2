@@ -116,6 +116,7 @@ window.onload = function() {
 
 function exit() {
     console.log(Cookies.get());
+    Cookies.remove('mail');
     Cookies.remove('code');
     Cookies.remove('userName')
     console.log(Cookies.get());
